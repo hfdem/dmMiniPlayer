@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 # Detect and switch Node.js version according to .nvmrc in PWD
+# 如果检测到是在 CI 环境（如 GitHub Actions），直接退出不报错
+if [ "$CI" = "true" ]; then
+  exit 0
+fi
 
 nvm_auto_use() {
   local nvmrc_path node_version nvmrc_version nvmrc_major current_major current_minor current_patch
